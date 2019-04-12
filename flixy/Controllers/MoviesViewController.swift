@@ -40,12 +40,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func mapToModel(movies: [[String:Any]]?){
         let baseURL = "https://image.tmdb.org/t/p/w500/"
         
-        for movie in movies! {
-            let title = movie["title"] as! String
-            let description = movie["overview"] as! String
-            let poster = movie["poster_path"] as! String
-            let movie = Movie.init(title: title, description: description, poster: baseURL + poster)
-            moviesList.append(movie!)
+        //Guards movies so movies are only populated if the JSON is returned from HTTP
+        if let movies = movies as? [[String:Any]] {
+            for movie in movies {
+                let title = movie["title"] as! String
+                let description = movie["overview"] as! String
+                let poster = movie["poster_path"] as! String
+                let movie = Movie.init(title: title, description: description, poster: baseURL + poster)
+                moviesList.append(movie!)
+            }
         }
     }
     
