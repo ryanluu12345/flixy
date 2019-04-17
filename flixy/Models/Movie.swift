@@ -12,13 +12,15 @@ class Movie {
     var title: String
     var description: String
     var poster: String
+    var backdrop: String
     
-    init?(title: String, description: String, poster: String) {
-        if title.isEmpty || description.isEmpty || poster.isEmpty {
+    init?(title: String, description: String, poster: String, backdrop: String) {
+        if title.isEmpty || description.isEmpty || poster.isEmpty || backdrop.isEmpty {
             return nil
         }
         self.title = title
         self.description = description
         self.poster = poster
+        self.backdrop = backdrop
     }
 }

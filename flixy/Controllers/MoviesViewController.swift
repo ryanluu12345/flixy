@@ -46,7 +46,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 let title = movie["title"] as! String
                 let description = movie["overview"] as! String
                 let poster = movie["poster_path"] as! String
-                let movie = Movie.init(title: title, description: description, poster: baseURL + poster)
+                let backdrop = movie["backdrop_path"] as! String
+                let movie = Movie.init(title: title, description: description, poster: baseURL + poster, backdrop: baseURL + backdrop)
                 moviesList.append(movie!)
             }
         }
@@ -62,5 +63,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.descriptionLabel.text = moviesList[indexPath.row].description
         cell.posterImage.af_setImage(withURL: URL(string: moviesList[indexPath.row].poster)!)
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let movie = moviesList[indexPath.row]
+        let detailsViewController = segue.destination as! MovieDetailsViewController
+        detailsViewController.movie = movie
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
