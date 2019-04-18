@@ -12,10 +12,10 @@ flixy is an app that allows users to browse movies from the [The Movie Database 
 
 #### BONUS
 - [x] (2pts) User can tap a poster in the collection view to see a detail screen of that movie.
-- [ ] (2pts) In the detail view, when the user taps the poster, a new screen is presented modally where they can view the trailer.
+- [x] (2pts) In the detail view, when the user taps the poster, a new screen is presented modally where they can view the trailer.
 
 ### App Walkthough GIF
-<img src="http://g.recordit.co/faQMEyrncW.gif" width=250><br>
+<img src="http://g.recordit.co/MWeE3WXeeR.gif" width=250><br>
 
 ### Notes
 There were challenges with getting the UI just right for the collection view. I struggled with making the spacings correct so that there were equal margins and the correct amount of items in each row.
