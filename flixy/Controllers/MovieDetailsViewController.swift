@@ -24,4 +24,14 @@ class MovieDetailsViewController: UIViewController {
         posterImageView.af_setImage(withURL: URL(string: (movie?.poster)!)!)
         backgroundImageView.af_setImage(withURL: URL(string: (movie?.backdrop)!)!)
     }
+    
+    @IBAction func onPosterTap(_ sender: Any) {
+        performSegue(withIdentifier: "showTrailer", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navViewController = segue.destination as! UINavigationController
+        let movieTrailerViewController = navViewController.topViewController as! MovieTrailerViewController
+        movieTrailerViewController.movie = movie
+    }
 }

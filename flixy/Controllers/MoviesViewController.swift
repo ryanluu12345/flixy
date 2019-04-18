@@ -43,11 +43,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         //Guards movies so movies are only populated if the JSON is returned from HTTP
         if let movies = movies as? [[String:Any]] {
             for movie in movies {
+                let id = movie["id"] as! Int
                 let title = movie["title"] as! String
                 let description = movie["overview"] as! String
                 let poster = movie["poster_path"] as! String
                 let backdrop = movie["backdrop_path"] as! String
-                let movie = Movie.init(title: title, description: description, poster: baseURL + poster, backdrop: baseURL + backdrop)
+                let movie = Movie.init(id: id, title: title, description: description, poster: baseURL + poster, backdrop: baseURL + backdrop)
                 moviesList.append(movie!)
             }
         }

@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="56" y="-1077"/>
         </scene>
-        <!--Movies View Controller-->
+        <!--Now Playing-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" customModule="flixy" customModuleProvider="target" sceneMemberID="viewController">
@@ -101,7 +101,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ic2-mI-Wqc"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="ic2-mI-Wqc"/>
                     <connections>
                         <outlet property="tableView" destination="Nnq-kd-SIZ" id="ELM-NP-04g"/>
                     </connections>
@@ -121,17 +121,23 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TA4-Yf-2tM">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="299"/>
                                 <color key="backgroundColor" red="0.69803921570000005" green="0.96078431369999995" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="299" id="M7c-7M-5NX"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QVq-81-Vd9">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QVq-81-Vd9">
                                 <rect key="frame" x="16" y="215" width="145" height="240"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="145" id="ZNt-wv-7p1"/>
                                     <constraint firstAttribute="height" constant="240" id="hJd-FD-mVt"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="T5z-q7-ucP" appends="YES" id="D0k-VZ-y1F"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACg-6B-dJ3">
                                 <rect key="frame" x="169" y="363" width="163" height="33.5"/>
@@ -173,11 +179,62 @@
                         <outlet property="descriptionLabel" destination="9I4-Ty-YDi" id="34r-vL-ahx"/>
                         <outlet property="posterImageView" destination="QVq-81-Vd9" id="7h6-Gz-3vJ"/>
                         <outlet property="titleLabel" destination="ACg-6B-dJ3" id="CaY-vt-Pnu"/>
+                        <segue destination="QXQ-7S-lK5" kind="presentation" identifier="showTrailer" id="Bb4-NK-8qD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLm-Wd-HCO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="T5z-q7-ucP">
+                    <connections>
+                        <action selector="onPosterTap:" destination="4l0-Fq-nHQ" id="ZKC-9H-9Gv"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-956" y="1563"/>
+        </scene>
+        <!--Movie Trailer View Controller-->
+        <scene sceneID="5zr-Id-4IY">
+            <objects>
+                <viewController storyboardIdentifier="movieTrailerViewController" id="CeU-LT-HLE" customClass="MovieTrailerViewController" customModule="flixy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="242-Uv-Znv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rwa-ME-jiM">
+                                <rect key="frame" x="16" y="194" width="343" height="351"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="395" id="FFJ-WE-Cjt"/>
+                                </constraints>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="t2c-ii-dlY" firstAttribute="bottom" secondItem="Rwa-ME-jiM" secondAttribute="bottom" constant="122" id="9Br-Nd-T1p"/>
+                            <constraint firstItem="Rwa-ME-jiM" firstAttribute="top" secondItem="t2c-ii-dlY" secondAttribute="top" constant="130" id="aVS-hg-02P"/>
+                            <constraint firstItem="t2c-ii-dlY" firstAttribute="trailing" secondItem="Rwa-ME-jiM" secondAttribute="trailing" constant="16" id="bY5-Ed-VSI"/>
+                            <constraint firstItem="Rwa-ME-jiM" firstAttribute="leading" secondItem="t2c-ii-dlY" secondAttribute="leading" constant="16" id="lQl-aS-Und"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="t2c-ii-dlY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZOs-ds-nKQ">
+                        <barButtonItem key="leftBarButtonItem" title="Exit" id="idU-tG-Rk3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onExitTap:" destination="CeU-LT-HLE" id="A2F-Bf-cwP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="Rwa-ME-jiM" id="bLk-uj-9tU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ae4-n0-TgY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-956" y="3203"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="4EF-Xb-SlS">
@@ -188,6 +245,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="95e-3k-O6q">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -198,7 +259,7 @@
             </objects>
             <point key="canvasLocation" x="-956" y="-228"/>
         </scene>
-        <!--Movie Grid View Controller-->
+        <!--Recommended-->
         <scene sceneID="Dj0-Pa-qbc">
             <objects>
                 <viewController id="Fzt-kN-Itj" customClass="MovieGridViewController" customModule="flixy" customModuleProvider="target" sceneMemberID="viewController">
@@ -252,7 +313,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eOj-cM-1Sp"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mmp-ur-Rsg"/>
+                    <navigationItem key="navigationItem" title="Recommended" id="mmp-ur-Rsg"/>
                     <connections>
                         <outlet property="movieCollectionView" destination="ers-O5-9dN" id="xw5-vl-qbO"/>
                     </connections>
@@ -270,6 +331,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3Vx-Px-m6B">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -279,6 +344,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4jj-a5-lyM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1061.5999999999999" y="-228.03598200899552"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5S2-TV-30y">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QXQ-7S-lK5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="U4c-Yl-7SV">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CeU-LT-HLE" kind="relationship" relationship="rootViewController" id="pFD-r8-gZA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aPt-W2-ydQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-956" y="2396.8515742128939"/>
         </scene>
     </scenes>
     <resources>
